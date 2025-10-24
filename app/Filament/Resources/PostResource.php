@@ -16,6 +16,7 @@ use Filament\Forms\Components\MultiSelect;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Table; 
 use Filament\Resources\Resource;
+use Filament\Forms\Components\RichEditor;
 
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -61,9 +62,12 @@ class PostResource extends Resource
                     ->placeholder('Sélectionnez un ou plusieurs tags')
                     ->helperText('Choisissez les tags associés à cet article.'),
 
-                Textarea::make('content')
-                    ->required()
-                    ->rows(10),
+                RichEditor::make('content')
+                       ->toolbarButtons([
+                         'bold','italic','strike','link','bulletList','orderedList',
+                          'blockquote','h2','h3','code','attachFiles','undo','redo',
+                       ])
+                    ->required(),
                 DatePicker::make('published_at')
                     ->label('Publish Date'),
                 FileUpload::make('image')
